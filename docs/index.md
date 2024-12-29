@@ -3,23 +3,32 @@
 layout: home
 
 hero:
-  name: "TODO: Title"
-  text: "TODO: Subtitle"
-  tagline: "TODO: Tagline"
-  actions:
-    - theme: brand
-      text: Template Repository
-      link: "https://github.com/61040-fa24/vitepress-template"
-    - theme: alt
-      text: Example Site
-      link: "https://61040-fa24.github.io/portfolio-dhua/"
-
-features:
-  - title: Blogs
-    details: Some cool blogs you'll write this semester!
-    link: /blogs
-  - title: Assignments
-    details: All of your assignments will be posted on your portfolio.
-  - title: About Me
-    details: You'll implement a small bio about yourself on here!
+  name: "Antiques Gallery"
+  text: "Collected by ZZ"
+  # tagline: "Collected by ZZ"
 ---
+
+<script setup>
+  const galleryImages = import.meta.glob('../assets/gallery/*.png',{eager: true});
+  console.log(galleryImages);
+  const galleryImageUrls = Object.values(galleryImages).map(module => module.default);
+</script>
+
+<div class="gallery-images">
+<img v-for="(url, index) in galleryImageUrls" :key="index" :src="url" alt="Gallery image" />
+</div>
+
+<style>
+.gallery-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.gallery-images img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+</style>
