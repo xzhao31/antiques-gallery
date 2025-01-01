@@ -20,7 +20,7 @@ hero:
       console.log('picture')
       console.log(path)
       console.log(url)
-      const tagFilePath = url.replace(/(jpg|jpeg|png)$/i,'txt');
+      const tagFilePath = path.replace(/(jpg|jpeg|png)$/i,'txt');
       console.log(tagFilePath)
       let tags = '';
       try {
