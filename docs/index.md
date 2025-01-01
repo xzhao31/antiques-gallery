@@ -17,7 +17,11 @@ hero:
   const galleryData = ref([]);
   onMounted(async () => {
     galleryData.value = await Promise.all(Object.entries(galleryImages).map(async ([path, url]) => {
+      console.log('picture')
+      console.log(path)
+      console.log(url)
       const tagFilePath = url.replace(/(jpg|jpeg|png)$/i,'txt');
+      console.log(tagFilePath)
       let tags = '';
       try {
         const response = await fetch(tagFilePath);
