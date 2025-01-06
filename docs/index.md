@@ -12,8 +12,8 @@ hero:
   import { ref, onMounted } from 'vue';
   import { withBase, useData } from 'vitepress'
 
-  console.log('trial 11')
-  const galleryImages = import.meta.glob('./public/gallery/*.{jpg,jpeg,png}',{eager: true, as: 'url'});
+  console.log('trial 12')
+  const galleryImages = import.meta.glob('./gallery/*.{jpg,jpeg,png}',{eager: true, as: 'url'});
   // const galleryImages = import.meta.glob('./gallery/*.{jpg,jpeg,png}',{eager: true, as: 'url'});
 
   const galleryData = ref([]);
