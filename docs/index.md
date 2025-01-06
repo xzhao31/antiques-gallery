@@ -11,7 +11,7 @@ hero:
 <script setup>
   import { ref, onMounted } from 'vue';
 
-  console.log('trial 8')
+  console.log('trial 9')
   const galleryImages = import.meta.glob('./public/gallery/*.{jpg,jpeg,png}',{eager: true, as: 'url'});
 
   const galleryData = ref([]);
@@ -20,7 +20,7 @@ hero:
       console.log('picture')
       console.log(path)
       console.log(url)
-      const tagFilePath = url.replace(/(jpg|jpeg|png)$/i,'txt').replace(/\.\./g, '/antiques-gallery');
+      const tagFilePath = withBase(url.replace(/(jpg|jpeg|png)$/i,'txt').replace(/\.\./g, '/antiques-gallery'));
       console.log(tagFilePath)
       let tags = '';
       try {
@@ -32,35 +32,6 @@ hero:
       return { url, tags: tags || 'untagged' };
     }));
   });
-  // onMounted(async () => {
-  //   const imageContext = import.meta.glob('/public/assets/gallery/*.{jpg,jpeg,png}', { eager: true, as: 'url' });
-    
-  //   galleryData.value = await Promise.all(
-  //     Object.entries(imageContext).map(async ([path, url]) => {
-  //       const imageName = path.split('/').pop();
-  //       const tagFileName = imageName.replace(/\.(jpg|jpeg|png)$/i, '.txt');
-  //       const tagFilePath = `/assets/gallery/${tagFileName}`;
-        
-  //       let tags = '';
-  //       try {
-  //         const response = await fetch(tagFilePath);
-  //         tags = await response.text();
-  //       } catch (error) {
-  //         console.error(`Error fetching tags for ${imageName}:`, error);
-  //       }
-        
-  //       return { url, tags: tags || 'untagged' };
-  //     })
-  //   );
-  // });
-
-
-
-  // const images = [
-  //   'https://drive.google.com/thumbnail?id=1NYBJZniY1bADgUzlbpqs1u1KtrtXSZYY&sz=w1000',
-  //   'https://drive.google.com/thumbnail?id=150J0beW4TMSAXg4bxgBQcCz3giyffDca&sz=w1000',
-  //   'https://drive.google.com/thumbnail?id=1d959MKRCU_bZ-h4ZQLMhgRTWpZVOf8UI&sz=w1000'
-  //     ];
 </script>
 
 <div class="gallery-container">
@@ -68,7 +39,6 @@ hero:
     <img :src="image.url" />
     <p>{{ image.tags }}</p>
   </div>
-  <!-- <img v-for="(image, index) in images" :key="index" :src="image" alt="Google Drive Image"> -->
 </div>
 
 <style>
