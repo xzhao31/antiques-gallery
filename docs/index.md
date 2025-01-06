@@ -10,9 +10,11 @@ hero:
 
 <script setup>
   import { ref, onMounted } from 'vue';
+  import { withBase, useData } from 'vitepress'
 
-  console.log('trial 9')
+  console.log('trial 10')
   const galleryImages = import.meta.glob('./public/gallery/*.{jpg,jpeg,png}',{eager: true, as: 'url'});
+  // const galleryImages = import.meta.glob('./gallery/*.{jpg,jpeg,png}',{eager: true, as: 'url'});
 
   const galleryData = ref([]);
   onMounted(async () => {
@@ -21,6 +23,7 @@ hero:
       console.log(path)
       console.log(url)
       const tagFilePath = withBase(url.replace(/(jpg|jpeg|png)$/i,'txt').replace(/\.\./g, '/antiques-gallery'));
+      // const tagFilePath = url.replace(/(jpg|jpeg|png)$/i,'txt').replace(/\.\./g, '/antiques-gallery');
       console.log(tagFilePath)
       let tags = '';
       try {
