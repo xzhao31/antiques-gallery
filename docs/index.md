@@ -11,7 +11,7 @@ hero:
 <script setup>
   import { ref, onMounted } from 'vue';
 
-  console.log('trial 5')
+  console.log('trial 6')
   const galleryImages = import.meta.glob('./public/gallery/*.{jpg,jpeg,png}',{eager: true, as: 'url'});
 
   const galleryData = ref([]);
@@ -20,7 +20,7 @@ hero:
       console.log('picture')
       console.log(path)
       console.log(url)
-      const tagFilePath = url.replace(/(jpg|jpeg|png)$/i,'txt').replace(/\.\./g, '/antiques-gallery');
+      const tagFilePath = path.replace(/(jpg|jpeg|png)$/i,'txt').replace(/\.\./g, '/antiques-gallery');
       console.log(tagFilePath)
       let tags = '';
       try {
