@@ -10,39 +10,27 @@ hero:
 
 <script setup>
   import { ref, onMounted } from 'vue';
-  import { withBase, useData } from 'vitepress'
-
-  console.log('trial 12')
-  const galleryImages = import.meta.glob('./gallery/*.{jpg,jpeg,png}',{eager: true, as: 'url'});
-  // const galleryImages = import.meta.glob('./gallery/*.{jpg,jpeg,png}',{eager: true, as: 'url'});
+  import { withBase } from 'vitepress';
 
   const galleryData = ref([]);
   onMounted(async () => {
-    galleryData.value = await Promise.all(Object.entries(galleryImages).map(async ([path, url]) => {
-      console.log('picture')
-      console.log(path)
-      console.log(url)
-      const tagFilePath = withBase(path.replace(/(jpg|jpeg|png)$/i,'txt').replace(/\.\./g, '/antiques-gallery'));
-      // const tagFilePath = withBase(path.replace(/(jpg|jpeg|png)$/i,'txt'));
-      // const tagFilePath = path.replace(/(jpg|jpeg|png)$/i,'txt');
-      // const tagFilePath = url.replace(/(jpg|jpeg|png)$/i,'txt').replace(/\.\./g, '/antiques-gallery');
-      console.log(tagFilePath)
-      let tags = '';
-      try {
-        const response = await fetch(tagFilePath);
-        tags = await response.text();
-      } catch (error) {
-        console.error(`Error fetching tags for ${url}:`, error);
-      }
-      return { url, tags: tags || 'untagged' };
-    }));
+    try {
+      const response = await fetch(withBase('/gallery-data.json'));
+      const data = await response.json();
+      galleryData.value = data.map(item => ({
+        ...item,
+        url: withBase(item.url)
+      }));
+    } catch (error) {
+      console.error('Error loading gallery data:', error);
+    }
   });
 </script>
 
 <div class="gallery-container">
- <div v-for="(image, index) in galleryData" :key="index" class="gallery-image">
-    <img :src="image.url" />
-    <p>{{ image.tags }}</p>
+  <div v-for="(image, index) in galleryData" :key="index" class="gallery-image">
+    <img :src="image.url" :alt="image.tags.join(', ')" />
+    <p>{{ image.tags.join(', ') }}</p>
   </div>
 </div>
 
