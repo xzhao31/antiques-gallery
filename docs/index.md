@@ -11,7 +11,7 @@ hero:
 <script setup>
   import { ref, onMounted } from 'vue';
 
-  console.log('trial 7')
+  console.log('trial 8')
   const galleryImages = import.meta.glob('./public/gallery/*.{jpg,jpeg,png}',{eager: true, as: 'url'});
 
   const galleryData = ref([]);
