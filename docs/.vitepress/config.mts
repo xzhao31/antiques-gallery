@@ -3,7 +3,6 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "ZZ's Antiques Gallery",
-  // description: "6.1040 Fall 2024",
   base: '/antiques-gallery/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -24,4 +23,11 @@ export default defineConfig({
       lazyLoading: true
     }
   },
+  // vite: {
+  //   resolve: {
+  //     alias: {
+  //       '@public': ''
+  //     }
+  //   }
+  // }
 });
